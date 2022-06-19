@@ -32,8 +32,8 @@ struct AddressBox {
 	int total; // 总数
 };
 
-// 添加通讯录
-void addAddressBox(AddressBox* addressBox) {
+// 添加/修改通讯录
+void addData(AddressBox* addressBox, int total) {
 	// 输入姓名
 	cout << "输入姓名:" << endl;
 	string name;
@@ -69,28 +69,67 @@ void addAddressBox(AddressBox* addressBox) {
 	cin >> address;
 
 	// 赋值
-	addressBox->personArr[addressBox->total].name = name;
-	addressBox->personArr[addressBox->total].age = age;
-	addressBox->personArr[addressBox->total].sex = sex;
-	addressBox->personArr[addressBox->total].phone = phone;
-	addressBox->personArr[addressBox->total].address = address;
-	addressBox->total++;
+	addressBox->personArr[total].name = name;
+	addressBox->personArr[total].age = age;
+	addressBox->personArr[total].sex = sex;
+	addressBox->personArr[total].phone = phone;
+	addressBox->personArr[total].address = address;
+	system("cls");
 }
 
 // 显示通讯录
-void showAddressBox(AddressBox addressBox) {
-	for (int i = 0; i < addressBox.total; i++) {
-		string sex = addressBox.personArr[i].sex == 1 ? "女" : "男";
-		cout << "姓名： " << addressBox.personArr[i].name
+void showData(AddressBox* addressBox) {
+	for (int i = 0; i < addressBox -> total; i++) {
+		string sex = addressBox -> personArr[i].sex == 1 ? "女" : "男";
+		cout << "姓名： " << addressBox->personArr[i].name
 			<< " 性别： " << sex
-			<< " 年龄： " << addressBox.personArr[i].age
-			<< " 电话： " << addressBox.personArr[i].phone
-			<< " 地址： " << addressBox.personArr[i].address
+			<< " 年龄： " << addressBox->personArr[i].age
+			<< " 电话： " << addressBox->personArr[i].phone
+			<< " 地址： " << addressBox->personArr[i].address
 			<< endl;
 	};
 }
 
-int main() {
+// 验证是否存在该名字
+int isExist(AddressBox* addressBox, string name) {
+	for (int i = 0; i < addressBox->total; i++) {
+		if (addressBox->personArr[i].name == name) {
+			return i;
+		}
+	}
+	cout << "未找到该姓名" << endl;
+	return -1;
+}
+
+// 修改通讯录
+void updateData(AddressBox* addressBox) {
+	cout << "请输入需要修改的名字：" << endl;
+	string name;
+	cin >> name;
+	int index = isExist(addressBox, name);
+	if (index != -1) addData(addressBox, index);
+	system("cls");
+}
+
+// 删除通讯录
+void deleteeData(AddressBox* addressBox) {
+	cout << "请输入需要删除的名字：" << endl;
+	string name;
+	cin >> name;
+	int index = isExist(addressBox, name);
+	if (index != -1) {
+		for (int i = 0; i < addressBox->total; i++) {
+			if (i >= index) {
+				addressBox->personArr[i] = addressBox->personArr[i + 1];
+			}
+		}
+		addressBox->total--;
+		cout << "删除成功!" << endl;
+		system("cls");
+	}
+}
+
+void main() {
 	// 初始化通讯录内容
 	AddressBox data;
 	data.total = 0;
@@ -107,35 +146,40 @@ int main() {
 			// 添加通讯录
 			case 1:
 				cout << "添加通讯录" << endl;
-				addAddressBox(&data);
+				addData(&data, data.total);
+				data.total++;
 				break;
 
 			// 添加通讯录
 			case 2:
 				cout << "显示通讯录" << endl;
-				showAddressBox(data);
+				showData(&data);
 				break;
 
 			// 修改通讯录
 			case 3:
 				cout << "修改通讯录" << endl;
+				updateData(&data);
 				break;
 
 			// 删除通讯录
 			case 4:
 				cout << "删除通讯录" << endl;
+				deleteeData(&data);
 				break;
 
 			// 清空通讯录
 			case 5:
 				cout << "清空通讯录" << endl;
+				data.total = 0;
+				system("cls");
 				break;
 
 			// 退出通讯录
 			case 0:
 				cout << "退出通讯录" << endl;
 				system("pause");
-				return 0;
+				return;
 				break;
 
 			// 无效值
@@ -145,5 +189,5 @@ int main() {
 		}
 	}
 	system("pause");
-	return 0;
+	return;
 }

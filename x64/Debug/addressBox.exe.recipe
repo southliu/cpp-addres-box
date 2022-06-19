@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\case\cpp-demo\addressBox\x64\Debug\addressBox.exe</FullPath>
+      <FullPath>D:\case\cpp\cpp-addres-box\x64\Debug\addressBox.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
