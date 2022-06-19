@@ -1,3 +1,1 @@
-﻿  main.cpp
-D:\case\cpp-demo\addressBox\main.cpp(5,13): warning C4326: “main”的返回类型应为“int”而非“void”
-  addressBox.vcxproj -> D:\case\cpp-demo\addressBox\x64\Debug\addressBox.exe
+﻿  addressBox.vcxproj -> D:\case\cpp-demo\addressBox\x64\Debug\addressBox.exe
