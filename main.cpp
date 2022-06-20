@@ -11,7 +11,8 @@ void showMenu() {
 	cout << "**** 2-显示通讯录 ****" << endl;
 	cout << "**** 3-修改通讯录 ****" << endl;
 	cout << "**** 4-删除通讯录 ****" << endl;
-	cout << "**** 5-清空通讯录 ****" << endl;
+	cout << "**** 5-查找通讯录 ****" << endl;
+	cout << "**** 6-清空通讯录 ****" << endl;
 	cout << "**** 0-退出通讯录 ****" << endl;
 	cout << "**********************" << endl;
 	cout << endl;
@@ -74,6 +75,8 @@ void addData(AddressBox* addressBox, int total) {
 	addressBox->personArr[total].sex = sex;
 	addressBox->personArr[total].phone = phone;
 	addressBox->personArr[total].address = address;
+	cout << "操作成功" << endl;
+	system("pause");
 	system("cls");
 }
 
@@ -88,6 +91,8 @@ void showData(AddressBox* addressBox) {
 			<< " 地址： " << addressBox->personArr[i].address
 			<< endl;
 	};
+	system("pause");
+	system("cls");
 }
 
 // 验证是否存在该名字
@@ -108,6 +113,7 @@ void updateData(AddressBox* addressBox) {
 	cin >> name;
 	int index = isExist(addressBox, name);
 	if (index != -1) addData(addressBox, index);
+	system("pause");
 	system("cls");
 }
 
@@ -125,6 +131,26 @@ void deleteeData(AddressBox* addressBox) {
 		}
 		addressBox->total--;
 		cout << "删除成功!" << endl;
+		system("pause");
+		system("cls");
+	}
+}
+
+// 查找通讯录
+void findData(AddressBox* addressBox) {
+	cout << "请输入需要查找的名字：" << endl;
+	string name;
+	cin >> name;
+	int index = isExist(addressBox, name);
+	if (index != -1) {
+		string sex = addressBox->personArr[index].sex == 1 ? "女" : "男";
+		cout << "姓名： " << addressBox->personArr[index].name
+			<< " 性别： " << sex
+			<< " 年龄： " << addressBox->personArr[index].age
+			<< " 电话： " << addressBox->personArr[index].phone
+			<< " 地址： " << addressBox->personArr[index].address
+			<< endl;
+		system("pause");
 		system("cls");
 	}
 }
@@ -168,10 +194,18 @@ void main() {
 				deleteeData(&data);
 				break;
 
-			// 清空通讯录
+			// 查找通讯录
 			case 5:
+				cout << "查找通讯录" << endl;
+				findData(&data);
+				break;
+
+			// 清空通讯录
+			case 6:
 				cout << "清空通讯录" << endl;
 				data.total = 0;
+				cout << "清空成功!" << endl;
+				system("pause");
 				system("cls");
 				break;
 
