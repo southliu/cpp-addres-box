@@ -35,49 +35,56 @@ struct AddressBox {
 
 // 添加/修改通讯录
 void addData(AddressBox* addressBox, int total) {
-	// 输入姓名
-	cout << "输入姓名:" << endl;
-	string name;
-	cin >> name;
-
-	// 输入性别
-	cout << "输入性别:" << endl;
-	cout << "0 --- 男:" << endl;
-	cout << "1 --- 女:" << endl;
-	int sex;
-	cin >> sex;
-	while(true) {
-		if (sex == 0 || sex == 1) {
-			break;
-		}
-		cout << "输入值无效，请重新输入" << endl;
-		cin >> sex;
+	if (addressBox->total > MAX) {
+		cout << "通讯录已满，无法继续添加" << endl;
+		system("pause");
+		system("cls");
 	}
+	else {
+		// 输入姓名
+		cout << "输入姓名:" << endl;
+		string name;
+		cin >> name;
 
-	// 输入年龄
-	cout << "输入年龄:" << endl;
-	int age;
-	cin >> age;
+		// 输入性别
+		cout << "输入性别:" << endl;
+		cout << "0 --- 男:" << endl;
+		cout << "1 --- 女:" << endl;
+		int sex;
+		cin >> sex;
+		while (true) {
+			if (sex == 0 || sex == 1) {
+				break;
+			}
+			cout << "输入值无效，请重新输入" << endl;
+			cin >> sex;
+		}
 
-	// 输入电话
-	cout << "输入电话:" << endl;
-	int phone;
-	cin >> phone;
+		// 输入年龄
+		cout << "输入年龄:" << endl;
+		int age;
+		cin >> age;
 
-	// 输入地址
-	cout << "输入地址:" << endl;
-	string address;
-	cin >> address;
+		// 输入电话
+		cout << "输入电话:" << endl;
+		int phone;
+		cin >> phone;
 
-	// 赋值
-	addressBox->personArr[total].name = name;
-	addressBox->personArr[total].age = age;
-	addressBox->personArr[total].sex = sex;
-	addressBox->personArr[total].phone = phone;
-	addressBox->personArr[total].address = address;
-	cout << "操作成功" << endl;
-	system("pause");
-	system("cls");
+		// 输入地址
+		cout << "输入地址:" << endl;
+		string address;
+		cin >> address;
+
+		// 赋值
+		addressBox->personArr[total].name = name;
+		addressBox->personArr[total].age = age;
+		addressBox->personArr[total].sex = sex;
+		addressBox->personArr[total].phone = phone;
+		addressBox->personArr[total].address = address;
+		cout << "操作成功" << endl;
+		system("pause");
+		system("cls");
+	}
 }
 
 // 显示通讯录
